@@ -15,9 +15,6 @@ public class ProductRepository {
         if (product.getProductQuantity() < 0) {
             product.setProductQuantity(0);
         }
-        if (product.getProductQuantity() < 0) {
-            product.setProductQuantity(0);
-        }
         productData.add(product);
         return product;
     }
