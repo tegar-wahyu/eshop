@@ -23,7 +23,7 @@ public class ProductController {
     }
 
     @PostMapping("/create")
-    public String createProductPost(@ModelAttribute Product product, Model model){
+    public String createProductPost(@ModelAttribute Product product){
         service.create(product);
         return "redirect:list";
     }
@@ -36,21 +36,21 @@ public class ProductController {
     }
 
     @GetMapping("/delete/{productId}")
-    public String deleteProduct(@PathVariable String productId, Model model){
+    public String deleteProduct(@PathVariable String productId){
         Product product = service.findById(productId);
         service.delete(product);
         return "redirect:/product/list";
     }
 
     @GetMapping("/edit/{productId}")
-    public String editProductPage(@ModelAttribute Product product, Model model){
-        Product productToEdit = service.findById(product.getProductId());
+    public String editProductPage(@PathVariable String productId, Model model){
+        Product productToEdit = service.findById(productId);
         model.addAttribute("product", productToEdit);
         return "EditProduct";
     }
 
     @PostMapping("/edit")
-    public String editProductPost(@ModelAttribute Product product, Model model){
+    public String editProductPost(@ModelAttribute Product product){
         service.edit(product);
         return "redirect:list";
     }
