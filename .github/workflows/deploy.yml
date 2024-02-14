@@ -1,7 +1,7 @@
 name: Deploy on Koyeb
 
 on:
-  pull_request:
+  push:
     branches:
       - module-2-exercise
 
