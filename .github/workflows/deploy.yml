@@ -6,11 +6,10 @@ on:
       - module-2-exercise
 
 jobs:
-  deploy_preview:
+  deployment:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    concurrency:
-      group: '${{ github.head_ref }}'
-      cancel-in-progress: true
+
     steps:
       - name: Install and configure the Koyeb CLI
         uses: koyeb-community/install-koyeb-cli@v2
