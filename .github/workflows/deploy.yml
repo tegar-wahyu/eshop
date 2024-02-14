@@ -7,7 +7,7 @@ on:
 
 jobs:
   deployment:
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/module-2-exercise'
     runs-on: ubuntu-latest
 
     steps:
