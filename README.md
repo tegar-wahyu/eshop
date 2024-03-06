@@ -168,3 +168,21 @@ Tidak menerapkan LSP juga dapat menyebabkan substitusi class yang tidak sesuai, 
 ![img.png](img.png)
 
 </details>
+
+<details>
+<summary> Module 4 </summary>
+
+## Module 3 - Maintainability & OO Principles
+### Reflection
+
+### Reflection 1
+Test-Driven Development (TDD) merupakan hal yang baru bagi saya. 
+Sebelumnya, saya biasa membuat test setelah membuat kode. 
+Namun, setelah mempelajari TDD, saya menyadari bahwa TDD memiliki banyak keuntungan. 
+Dengan TDD, saya dapat mengetahui apakah kode yang saya buat sudah berjalan dengan baik atau belum. 
+Karena ini adalah hal yang baru bagi saya, saya masih perlu banyak belajar dan berlatih untuk mengimplementasikan TDD dengan baik karena selain memikirkan kode yang harus dibuat, saya juga harus membuat test yang sesuai dan benar-benar menguji kode yang saya buat.
+
+### Reflection 2
+F.I.R.S.T. principle merupakan singkatan dari Fast, Independent, Repeatable, Self-Validating, dan Timely.
+Saya belum bisa memastikan apakah test yang saya buat sudah mengikuti F.I.R.S.T. principle atau belum. Mungkin untuk ke depannya ketika saya membuat test saya harus memperhatikan beberapa hal seperti menjalankan test secara terpisah, menjalankan test secara berulang, dan memastikan test yang saya buat sudah benar-benar menguji kode yang saya buat.
+</details>
