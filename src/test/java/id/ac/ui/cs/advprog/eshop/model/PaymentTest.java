@@ -20,10 +20,11 @@ class PaymentTest {
 
     @Test
     void testEmptyPaymentData() {
+        Payment payment = new Payment("13652556-012a-4c07-b546-54eb1396d79b",
+                "VOUCHER_CODE", this.paymentData);
         this.paymentData.clear();
         assertThrows(IllegalArgumentException.class, () -> {
-            Payment payment = new Payment("13652556-012a-4c07-b546-54eb1396d79b",
-                    "BANK_TRANSFER", this.paymentData);
+            payment.setPaymentData(this.paymentData);
         });
     }
 

@@ -20,12 +20,7 @@ public class Payment {
         this.id = id;
         this.method = method;
         this.status = PaymentStatus.PENDING.getValue();
-
-        if (paymentData.isEmpty()) {
-            throw new IllegalArgumentException();
-        } else {
-            this.paymentData = paymentData;
-        }
+        this.paymentData = paymentData;
     }
 
     public Payment(String id, String method, Map<String, String> paymentData, String status) {
@@ -39,5 +34,13 @@ public class Payment {
        } else {
            throw new IllegalArgumentException();
        }
+    }
+
+    public void setPaymentData(Map<String, String> paymentData) {
+        if (paymentData.isEmpty()) {
+            throw new IllegalArgumentException();
+        } else {
+            this.paymentData = paymentData;
+        }
     }
 }
