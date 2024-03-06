@@ -24,6 +24,7 @@ public class PaymentServiceImplTest {
     PaymentServiceImpl paymentService;
     @Mock
     PaymentRepository paymentRepository;
+    @Mock
     OrderRepository orderRepository;
     List<Payment> payments;
     List<Order> orders;
@@ -62,11 +63,13 @@ public class PaymentServiceImplTest {
 
     @Test
     void testAddPayment() {
+        Order order = orders.get(1);
         Payment payment = payments.get(1);
-        doReturn(payment).when(paymentRepository).save(payment);
+        doReturn(payment).when(paymentRepository).save(any(Payment.class));
 
-        Payment result = paymentService.addPayment(orders.get(1),
-                "VOUCHER_CODE", Map.of("voucherCode", "ESHOP1234ABC5678"));
+        Payment result = paymentService.addPayment(order, "VOUCHER_CODE",
+                Map.of("voucherCode", "ESHOP1234ABC5678"));
+        verify(paymentRepository, times(1)).save(any(Payment.class));
         assertEquals(payment.getId(), result.getId());
     }
 
@@ -81,7 +84,7 @@ public class PaymentServiceImplTest {
         Payment result = paymentService.setStatus(payment, "SUCCESS");
         Order updatedOrder = orderRepository.findById(payment.getId());
 
-        verify(orderRepository, times(1)).findById(payment.getId());
+        verify(orderRepository, times(2)).findById(payment.getId());
         verify(orderRepository, times(1)).save(order);
         verify(paymentRepository, times(1)).save(payment);
         assertEquals(payment.getId(), result.getId());
@@ -100,7 +103,7 @@ public class PaymentServiceImplTest {
         Payment result = paymentService.setStatus(payment, "REJECTED");
         Order updatedOrder = orderRepository.findById(payment.getId());
 
-        verify(orderRepository, times(1)).findById(payment.getId());
+        verify(orderRepository, times(2)).findById(payment.getId());
         verify(orderRepository, times(1)).save(order);
         verify(paymentRepository, times(1)).save(payment);
         assertEquals(payment.getId(), result.getId());
