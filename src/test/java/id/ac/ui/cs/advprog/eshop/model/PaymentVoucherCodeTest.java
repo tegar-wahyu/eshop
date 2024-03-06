@@ -15,17 +15,10 @@ class PaymentVoucherCodeTest {
     void setUp() {
         this.paymentData = new HashMap<>();
     }
-//    Voucher Code sub-feature will fill the Map<String, String> paymentData parameter when creating new Payment using this key-value pairs:
-//            “voucherCode”: the voucher code
-//    The payment status will automatically be “SUCCESS” if the voucher code follows these rules:
-//    The voucher code must be 16 characters long, and
-//    The voucher code must be started with “ESHOP”, and
-//    The voucher code must contain 8 numerical characters.
-//    Valid voucher code example is: “ESHOP1234ABC5678”. If the voucher code is invalid, the payment status will automatically be “REJECTED”.
 
     @Test
     void testEmptyPaymentData() {
-        Payment payment = new Payment("13652556-012a-4c07-b546-54eb1396d79b",
+        PaymentVoucherCode payment = new PaymentVoucherCode("13652556-012a-4c07-b546-54eb1396d79b",
                 "VOUCHER_CODE", this.paymentData);
         assertThrows(IllegalArgumentException.class, () -> {
             payment.setPaymentData(this.paymentData);
@@ -35,7 +28,7 @@ class PaymentVoucherCodeTest {
     @Test
     void testValidVoucherCode() {
         this.paymentData.put("voucherCode", "ESHOP1234ABC5678");
-        Payment payment = new Payment("13652556-012a-4c07-b546-54eb1396d79b",
+        PaymentVoucherCode payment = new PaymentVoucherCode("13652556-012a-4c07-b546-54eb1396d79b",
                 "VOUCHER_CODE", this.paymentData);
         payment.setPaymentData(this.paymentData);
         assertEquals("SUCCESS", payment.getStatus());
@@ -44,7 +37,7 @@ class PaymentVoucherCodeTest {
     @Test
     void testLessThan16VoucherCode() {
         this.paymentData.put("voucherCode", "ESHOP1234ABC567");
-        Payment payment = new Payment("13652556-012a-4c07-b546-54eb1396d79b",
+        PaymentVoucherCode payment = new PaymentVoucherCode("13652556-012a-4c07-b546-54eb1396d79b",
                 "VOUCHER_CODE", this.paymentData);
         payment.setPaymentData(this.paymentData);
         assertEquals("REJECTED", payment.getStatus());
@@ -53,7 +46,7 @@ class PaymentVoucherCodeTest {
     @Test
     void testMoreThan16VoucherCode() {
         this.paymentData.put("voucherCode", "ESHOP1234ABC56789");
-        Payment payment = new Payment("13652556-012a-4c07-b546-54eb1396d79b",
+        PaymentVoucherCode payment = new PaymentVoucherCode("13652556-012a-4c07-b546-54eb1396d79b",
                 "VOUCHER_CODE", this.paymentData);
         payment.setPaymentData(this.paymentData);
         assertEquals("REJECTED", payment.getStatus());
@@ -62,7 +55,7 @@ class PaymentVoucherCodeTest {
     @Test
     void testNotStartWithESHOP() {
         this.paymentData.put("voucherCode", "XSHOP1234ABC5678");
-        Payment payment = new Payment("13652556-012a-4c07-b546-54eb1396d79b",
+        PaymentVoucherCode payment = new PaymentVoucherCode("13652556-012a-4c07-b546-54eb1396d79b",
                 "VOUCHER_CODE", this.paymentData);
         payment.setPaymentData(this.paymentData);
         assertEquals("REJECTED", payment.getStatus());
@@ -71,7 +64,7 @@ class PaymentVoucherCodeTest {
     @Test
     void testNotContain8NumericalCharacters() {
         this.paymentData.put("voucherCode", "ESHOP1234ABC567X");
-        Payment payment = new Payment("13652556-012a-4c07-b546-54eb1396d79b",
+        PaymentVoucherCode payment = new PaymentVoucherCode("13652556-012a-4c07-b546-54eb1396d79b",
                 "VOUCHER_CODE", this.paymentData);
         payment.setPaymentData(this.paymentData);
         assertEquals("REJECTED", payment.getStatus());
