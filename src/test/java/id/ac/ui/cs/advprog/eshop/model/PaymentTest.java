@@ -14,6 +14,7 @@ class PaymentTest {
     @BeforeEach
     void setUp() {
         this.paymentData = new HashMap<>();
+        this.paymentData.put("voucherCode", "ESHOP1234ABC5678");
     }
 
     @Test
@@ -27,7 +28,6 @@ class PaymentTest {
 
     @Test
     void testCreatePaymentDefaultStatus() {
-        this.paymentData.put("voucherCode", "ESHOP1234ABC5678");
         Payment payment = new Payment("13652556-012a-4c07-b546-54eb1396d79b",
                 "VOUCHER_CODE", this.paymentData);
 
@@ -39,7 +39,6 @@ class PaymentTest {
 
     @Test
     void testCreatePaymentSuccessStatus() {
-        this.paymentData.put("voucherCode", "ESHOP1234ABC5678");
         Payment payment = new Payment("13652556-012a-4c07-b546-54eb1396d79b",
                 "VOUCHER_CODE", this.paymentData, "SUCCESS");
 
