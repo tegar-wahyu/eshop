@@ -12,5 +12,20 @@ class PaymentBankTransfer extends Payment {
     }
 
     @Override
-    public void setPaymentData(Map<String, String> paymentData) {}
+    public void setPaymentData(Map<String, String> paymentData) {
+        if (paymentData.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+
+        String bankName = paymentData.get("bankName");
+        String referenceCode = paymentData.get("referenceCode");
+
+        if (bankName.isEmpty() || referenceCode.isEmpty()) {
+            super.setStatus("REJECTED");
+        } else {
+            super.setStatus("SUCCESS");
+        }
+
+        super.setPaymentData(paymentData);
+    }
 }
