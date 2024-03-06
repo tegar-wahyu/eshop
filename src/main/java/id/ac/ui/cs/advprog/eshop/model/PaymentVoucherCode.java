@@ -12,5 +12,28 @@ class PaymentVoucherCode extends Payment {
     }
 
     @Override
-    public void setPaymentData(Map<String, String> paymentData) {return;}
+    public void setPaymentData(Map<String, String> paymentData) {
+        if (paymentData.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+
+        String voucherCode = paymentData.get("voucherCode");
+        boolean isLengthValid = voucherCode.length() == 16;
+        boolean isStartWithESHOP = voucherCode.startsWith("ESHOP");
+
+        int countDigit = 0;
+        for (int i = 0; i < voucherCode.length(); i++) {
+            if (!Character.isDigit(voucherCode.charAt(i))) {
+                countDigit++;
+            }
+        }
+
+        if (countDigit == 8 && isLengthValid && isStartWithESHOP) {
+            super.setStatus("SUCCESS");
+        } else {
+            super.setStatus("REJECTED");
+        }
+
+        super.setPaymentData(paymentData);
+    }
 }
